@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+hadoop fs -rmr /user/hadoopuser/output
