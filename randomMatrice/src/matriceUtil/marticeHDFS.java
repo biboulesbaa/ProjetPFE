@@ -41,9 +41,24 @@ public class marticeHDFS {
 	                        		line= "M,"+ i +"," + j + "," + M.data[i][j] +"\n";
 	    	                        br.write(line);    	
 		                        }	
-	                        }
-	                        
+	                        }                      
 	                        br.close();
+	                        
+
+	                        pt=new Path(path+"Inverse");
+	                        fs = FileSystem.get(new Configuration());
+	                        br=new BufferedWriter(new OutputStreamWriter(fs.create(pt,true)));
+	                        
+	                        matrix MI=new matrix(k, k);
+	                        MI.data=matrix.invert(M.data);
+	                        for ( int  i = 0 ; i< k ;i++){
+	                        	for ( int  j = 0 ; j< k ;j++){
+	                        		line= "MI,"+ i +"," + j + "," + MI.data[i][j] +"\n";
+	    	                        br.write(line);    	
+		                        }	
+	                        }
+	                        br.close();
+	                        
 	                }catch(Exception e){
 	                        System.out.println("File not found");
 	                }
