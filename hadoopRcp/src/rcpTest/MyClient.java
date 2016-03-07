@@ -33,8 +33,8 @@ public class MyClient {
     		System.out.println("wait generation" + p.waitFor());
        		// multiplication 
        	    pb = new ProcessBuilder("/bin/sh", "./run_product.sh" ,
-       	    		 hadoopCluster+"/user/hadoopuser/outputMatrice/",
-        			  hadoopCluster+"/user/hadoopuser/inputMatrice/",
+       	    		 hadoopCluster+"/user/hadoopuser/inputMatrice/",
+        			  hadoopCluster+"/user/hadoopuser/outputMatrice/",
         			  "5" , "5" , "40" , "M", "A", "MA");
         	p = pb.start(); 
     		System.out.println("wait multi" + p.waitFor());
