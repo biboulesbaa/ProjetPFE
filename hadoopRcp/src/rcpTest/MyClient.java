@@ -32,13 +32,13 @@ public class MyClient {
        		// multiplication 
        	    pb = new ProcessBuilder("/bin/sh", "./run_product.sh" 
         			, hadoopCluster+"/user/hadoopuser/inputMatrice/"
-        			, "hdfs://hadoopmaster:9000/user/hadoopuser/outputMatrice/", "5" , "5" , "40" , "M", "A", "MA");
+        			, hadoopCluster+"/user/hadoopuser/outputMatrice/", "5" , "5" , "40" , "M", "A", "MA");
         	p = pb.start(); 
     		System.out.println("wait multi" + p.waitFor());
        	    // script d envois de la matrice 
         	pb = new ProcessBuilder("/bin/sh", "./run_distcp.sh" 
         			, hadoopCluster+"/user/hadoopuser/outputMatrice/part-r-00000"
-        			, hadoopCluster);
+        			, hadoopCluster+"/");
         	p = pb.start(); 
     		System.out.println("wait send" + p.waitFor());
     		
