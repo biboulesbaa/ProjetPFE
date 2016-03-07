@@ -96,7 +96,9 @@ public class OneStepMatrixMultiplication {
         conf.set("mg", args[5]);  
         conf.set("md", args[6]);
         conf.set("mout", args[7]);
-                     
+        
+        
+        
         Job job = new Job(conf, "MatrixMatrixMultiplicationOneStep");
         job.setJarByClass(OneStepMatrixMultiplication.class);
         job.setOutputKeyClass(Text.class);

@@ -1,5 +1,5 @@
 hadoop dfs -rmr outputMatrice
-hadoop jar build/jar/calcul.jar inputMatrice/ outputMatrice/  5 40 40 A M AM
+hadoop jar build/jar/calcul.jar inputMatrice/ outputMatrice/  5 5 40 M A MA
 echo 'Job Input'
 echo '----------'
 echo ''

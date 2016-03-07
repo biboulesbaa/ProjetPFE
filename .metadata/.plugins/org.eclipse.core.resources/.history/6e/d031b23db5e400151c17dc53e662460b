@@ -32,16 +32,16 @@ public class MyClient {
         	p = pb.start(); 
     		System.out.println("wait generation" + p.waitFor());
        		// multiplication 
-
+<<<<<<< HEAD
        	    pb = new ProcessBuilder("/bin/sh", "./run_product.sh" ,
        	    		 hadoopCluster+"/user/hadoopuser/inputMatrice/",
         			  hadoopCluster+"/user/hadoopuser/outputMatrice/",
         			  "5" , "5" , "40" , "M", "A", "MA");
-
+=======
        	    pb = new ProcessBuilder("/bin/sh", "./run_product.sh" 
         			, hadoopCluster+"/user/hadoopuser/inputMatrice/"
         			, hadoopCluster+"/user/hadoopuser/outputMatrice/", "5" , "5" , "40" , "M", "A", "MA");
-
+>>>>>>> branch 'master' of https://github.com/biboulesbaa/ProjetPFE.git
         	p = pb.start(); 
     		System.out.println("wait multi" + p.waitFor());
        	    // script d envois de la matrice 
