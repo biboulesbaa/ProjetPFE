@@ -11,6 +11,7 @@ import java.net.InetSocketAddress;
 
 public class MyClient {
 	
+	
     public static void main(String[] args) throws IOException {
         InetSocketAddress inetSocketAddress = new InetSocketAddress(
                 MyServer.IPAddress, MyServer.PORT);
