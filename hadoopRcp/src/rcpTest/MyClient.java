@@ -1,20 +1,22 @@
 package rcpTest;
 
 import org.apache.hadoop.conf.Configuration;
+import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.ipc.RPC;
 
-import matriceUtil.marticeHDFS;
+
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
-
 
 public class MyClient {
 	
     public static void main(String[] args) throws IOException {
         InetSocketAddress inetSocketAddress = new InetSocketAddress(
                 MyServer.IPAddress, MyServer.PORT);
-
+        Configuration conf = new Configuration();
+        conf.addResource(new Path("/usr/local/hadoop/etc/hadoop/core-site.xml"));
+        String hadoopCluster = conf.get("fs.defaultFS")  ;
         try {
             // script de creation de la matrice     
         	ProcessBuilder pb = new ProcessBuilder("/bin/sh", "./run_tfidf.sh" , "input2/" , "output/"  );
@@ -22,20 +24,20 @@ public class MyClient {
        		System.out.println("wait create" + p.waitFor());
        		//generation
        		pb = new ProcessBuilder("/bin/sh", "./run_generation.sh" 
-        			, "hdfs://hadoopmaster:9000/user/hadoopuser/inputMatrice/"
+        			, hadoopCluster+"/user/hadoopuser/inputMatrice/"
         			, "5" );
         	p = pb.start(); 
     		System.out.println("wait generation" + p.waitFor());
        		// multiplication 
        	    pb = new ProcessBuilder("/bin/sh", "./run_product.sh" 
-        			, "hdfs://hadoopmaster:9000/user/hadoopuser/inputMatrice/"
+        			, hadoopCluster+"/user/hadoopuser/inputMatrice/"
         			, "hdfs://hadoopmaster:9000/user/hadoopuser/outputMatrice/", "5" , "5" , "40" , "M", "A", "MA");
         	p = pb.start(); 
     		System.out.println("wait multi" + p.waitFor());
        	    // script d envois de la matrice 
         	pb = new ProcessBuilder("/bin/sh", "./run_distcp.sh" 
-        			, "hdfs://hadoopmaster:9000/user/hadoopuser/outputMatrice/part-r-00000"
-        			, "hdfs://hadoopmaster:9000/" );
+        			, hadoopCluster+"/user/hadoopuser/outputMatrice/part-r-00000"
+        			, hadoopCluster);
         	p = pb.start(); 
     		System.out.println("wait send" + p.waitFor());
     		
