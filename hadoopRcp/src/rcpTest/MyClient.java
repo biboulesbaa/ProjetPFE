@@ -54,10 +54,6 @@ public class MyClient {
             System.out.println("construct"+ proxy.construct(10, 40) );
             System.out.println("product"+ proxy.product() );
             System.out.println("send"+ proxy.send() );
-            
-            
-            //int result = proxy.Add(145, 25);
-            //System.out.println("10+25=" + result);
 
             RPC.stopProxy(proxy); 
         } catch (Throwable e) {
