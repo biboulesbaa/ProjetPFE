@@ -1,0 +1,77 @@
+package rcpTest;
+
+import org.apache.hadoop.conf.Configuration;
+import org.apache.hadoop.fs.Path;
+import org.apache.hadoop.ipc.RPC;
+
+
+
+import java.io.IOException;
+import java.net.InetSocketAddress;
+
+public class MyClient {
+	
+	
+    public static void main(String[] args) throws IOException {
+        InetSocketAddress inetSocketAddress = new InetSocketAddress(
+                MyServer.IPAddress, MyServer.PORT);
+        Configuration conf = new Configuration();
+        conf.addResource(new Path("/usr/local/hadoop/etc/hadoop/core-site.xml"));
+        String hadoopCluster = conf.get("fs.defaultFS")  ;
+        
+        try {
+            // script de creation de la matrice     
+        	ProcessBuilder pb = new ProcessBuilder("/bin/sh", "./run_tfidf.sh" , "input2/" , "output/"  );
+       		Process p = pb.start(); 
+       		System.out.println("wait create" + p.waitFor());
+       		//generation
+       		pb = new ProcessBuilder("/bin/sh", "./run_generation.sh" 
+        	, "hdfs://hadoopmasterc2:9000/user/hadoopuser/inputMatrice/"
+   			, hadoopCluster+"/user/hadoopuser/inputMatrice/"
+        			, "5" );
+        	p = pb.start(); 
+    		System.out.println("wait generation" + p.waitFor());
+       		// multiplication 
+       	    pb = new ProcessBuilder("/bin/sh", "./run_product.sh" 
+<<<<<<< HEAD
+        			, "hdfs://hadoopmasterc2:9000/user/hadoopuser/inputMatrice/"
+        			, "hdfs://hadoopmasterc2:9000/user/hadoopuser/outputMatrice/",
+        			"40" , "40" , "40" , "M", "MI", "I");
+=======
+        			, hadoopCluster+"/user/hadoopuser/inputMatrice/"
+        			, "hdfs://hadoopmaster:9000/user/hadoopuser/outputMatrice/", "5" , "5" , "40" , "M", "A", "MA");
+>>>>>>> branch 'master' of https://github.com/biboulesbaa/ProjetPFE.git
+        	p = pb.start(); 
+    		System.out.println("wait multi" + p.waitFor());
+       	    // script d envois de la matrice 
+        	pb = new ProcessBuilder("/bin/sh", "./run_distcp.sh" 
+<<<<<<< HEAD
+        			, "hdfs://hadoopmasterc2:9000/user/hadoopuser/outputMatrice/part-r-00000"
+        			, "hdfs://hadoopmasterc2:9000/" );
+=======
+        			, hadoopCluster+"/user/hadoopuser/outputMatrice/part-r-00000"
+        			, hadoopCluster);
+>>>>>>> branch 'master' of https://github.com/biboulesbaa/ProjetPFE.git
+        	p = pb.start(); 
+    		System.out.println("wait send" + p.waitFor());
+    		
+    			
+            IProxyProtocol proxy = (IProxyProtocol) RPC.waitForProxy(
+                    IProxyProtocol.class, IProxyProtocol.versionID, inetSocketAddress,new Configuration());
+
+            
+            System.out.println("construct"+ proxy.construct(10, 40) );
+            System.out.println("construct"+ proxy.product() );
+            System.out.println("construct"+ proxy.send() );
+            
+            
+            //int result = proxy.Add(145, 25);
+            //System.out.println("10+25=" + result);
+
+            RPC.stopProxy(proxy); 
+        } catch (Throwable e) {
+            e.printStackTrace();
+        }
+    }
+
+}

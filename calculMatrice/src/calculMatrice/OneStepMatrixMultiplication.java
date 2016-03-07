@@ -88,6 +88,7 @@ public class OneStepMatrixMultiplication {
        //marticeHDFS.write(args[0]+"/matriceR", Integer.parseInt(args[2]));
         // A is an m-by-n matrix; B is an n-by-p matrix.
         //conf.addResource(new Path("/usr/local/hadoop/etc/hadoop/core-site.xml"));
+        //System.out.println(conf.get("fs.defaultFS"));
         
         conf.set("m", args[2]);  
         conf.set("n", args[3]);
@@ -95,7 +96,7 @@ public class OneStepMatrixMultiplication {
         conf.set("mg", args[5]);  
         conf.set("md", args[6]);
         conf.set("mout", args[7]);
-        //System.out.println(conf.get("fs.defaultFS"));
+        
         
         
         Job job = new Job(conf, "MatrixMatrixMultiplicationOneStep");
