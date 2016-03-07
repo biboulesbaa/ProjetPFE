@@ -12,7 +12,7 @@ import org.apache.hadoop.mapreduce.lib.input.TextInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import org.apache.hadoop.mapreduce.lib.output.TextOutputFormat;
 
-import matriceUtil.marticeHDFS;
+
  
 public class OneStepMatrixMultiplication {
  
@@ -87,12 +87,16 @@ public class OneStepMatrixMultiplication {
         
        //marticeHDFS.write(args[0]+"/matriceR", Integer.parseInt(args[2]));
         // A is an m-by-n matrix; B is an n-by-p matrix.
+        //conf.addResource(new Path("/usr/local/hadoop/etc/hadoop/core-site.xml"));
+        
         conf.set("m", args[2]);  
         conf.set("n", args[3]);
         conf.set("p", args[4]);
         conf.set("mg", args[5]);  
         conf.set("md", args[6]);
         conf.set("mout", args[7]);
+        //System.out.println(conf.get("fs.defaultFS"));
+        
         
         Job job = new Job(conf, "MatrixMatrixMultiplicationOneStep");
         job.setJarByClass(OneStepMatrixMultiplication.class);
