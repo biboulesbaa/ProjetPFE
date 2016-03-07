@@ -45,7 +45,6 @@ public class MyClient {
         			, hadoopCluster+"/");
         	p = pb.start(); 
     		System.out.println("wait send" + p.waitFor());
-    		
     			
             IProxyProtocol proxy = (IProxyProtocol) RPC.waitForProxy(
                     IProxyProtocol.class, IProxyProtocol.versionID, inetSocketAddress,new Configuration());
