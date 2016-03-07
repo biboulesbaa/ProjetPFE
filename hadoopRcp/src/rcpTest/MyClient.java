@@ -22,20 +22,21 @@ public class MyClient {
        		System.out.println("wait create" + p.waitFor());
        		//generation
        		pb = new ProcessBuilder("/bin/sh", "./run_generation.sh" 
-        			, "hdfs://hadoopmaster:9000/user/hadoopuser/inputMatrice/"
+        			, "hdfs://hadoopmasterc2:9000/user/hadoopuser/inputMatrice/"
         			, "5" );
         	p = pb.start(); 
     		System.out.println("wait generation" + p.waitFor());
        		// multiplication 
        	    pb = new ProcessBuilder("/bin/sh", "./run_product.sh" 
-        			, "hdfs://hadoopmaster:9000/user/hadoopuser/inputMatrice/"
-        			, "hdfs://hadoopmaster:9000/user/hadoopuser/outputMatrice/", "5" , "5" , "40" , "M", "A", "MA");
+        			, "hdfs://hadoopmasterc2:9000/user/hadoopuser/inputMatrice/"
+        			, "hdfs://hadoopmasterc2:9000/user/hadoopuser/outputMatrice/",
+        			"40" , "40" , "40" , "M", "MI", "I");
         	p = pb.start(); 
     		System.out.println("wait multi" + p.waitFor());
        	    // script d envois de la matrice 
         	pb = new ProcessBuilder("/bin/sh", "./run_distcp.sh" 
-        			, "hdfs://hadoopmaster:9000/user/hadoopuser/outputMatrice/part-r-00000"
-        			, "hdfs://hadoopmaster:9000/" );
+        			, "hdfs://hadoopmasterc2:9000/user/hadoopuser/outputMatrice/part-r-00000"
+        			, "hdfs://hadoopmasterc2:9000/" );
         	p = pb.start(); 
     		System.out.println("wait send" + p.waitFor());
     		
