@@ -84,6 +84,7 @@ public class OneStepMatrixMultiplication {
     public static void main(String[] args) throws Exception {
         Configuration conf = new Configuration();
         
+        
        //marticeHDFS.write(args[0]+"/matriceR", Integer.parseInt(args[2]));
         // A is an m-by-n matrix; B is an n-by-p matrix.
         conf.set("m", args[2]);  
