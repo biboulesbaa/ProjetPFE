@@ -9,7 +9,6 @@ import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.util.ProgramDriver;
 
 import utilities.filesMGR;
-import utilities.fusionFile;
 import utilities.terms;
 
 /**
@@ -24,10 +23,19 @@ public class Driver {
 	 */
 	
 	public static boolean ligne = true ; 
+	
+	public static String HADOOP_CLUSTER=null;
+	
 	public static void main(String[] args) {
         
 		int exitCode = -1;
 		ProgramDriver pgd = new ProgramDriver();
+		
+		Configuration conf=new Configuration();
+		conf.addResource("/usr/local/hadoop/etc/hadoop/core-site.xml");
+		HADOOP_CLUSTER=conf.get("fs.defaultFS");
+		
+			
         
 		try {
 			// Add all the join main classes
@@ -38,24 +46,10 @@ public class Driver {
 			pgd.addClass("tf-idf-3", WordsInCorpusTFIDF.class,
 					"TF-IDF 3 --- Word in Corpus and TF-IDF");
 			
-			//pgd.addClass("tf-idf-4", MatrixTfidf.class,
-				//	"TF-IDF 4 --- Matrix TF-IDF");
-
+		
 			// Execute the appropriate class
 			pgd.driver(args);
-			
-			/*String srcPath = "/user/hadoopuser/input"; 
-			String dstPath = "/user/hadoopuser/output/fusion"; 
-			Configuration conf = new Configuration(); 
-			try { 
-				FileSystem hdfs = FileSystem.get(conf); 
-			    FileUtil.copyMerge(hdfs, new Path(srcPath), hdfs, new Path(dstPath), false, conf, null); 
-			    } catch (IOException e){ 
-			    	
-			}*/
-		
-   
-			//fusionFile.fusion("user/hadoopuser/input/sample.txt", "user/hadoopuser/Terms/terms.txt" );
+
 			// Success
 			exitCode = 0;
 		} catch (Throwable e) {

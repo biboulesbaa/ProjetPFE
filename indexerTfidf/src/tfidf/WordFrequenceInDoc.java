@@ -34,18 +34,21 @@ public class WordFrequenceInDoc extends Configured implements Tool {
 	 */
 	public int run(String[] args) throws Exception {
 
+		
+       
 		if (args.length != 2) {
 			System.out.println("Usage: tf-idf-1 <doc-input> <tf-idf-1-output>");
 			System.exit(-1);
 		}
-		terms.getTerms("hdfs://hadoopmaster:9000/user/hadoopuser/Terms/terms.txt");
+		terms.getTerms(Driver.HADOOP_CLUSTER+"/user/hadoopuser/Terms/terms.txt");
         try {
 			filesMGR.list(args[0]);
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		} 
-		Configuration conf = getConf();
+	    
+        Configuration conf=new Configuration();
 		Job job = new Job(conf, "Word Frequence In Doc");
 
 		job.setJarByClass(WordFrequenceInDoc.class);

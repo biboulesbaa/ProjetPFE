@@ -14,8 +14,7 @@ package utilities;
 	                        //Path pt=new Path("hdfs://npvm11.np.wc1.yellowpages.com:9000/user/john/abc.txt");
 	                	    Path pt=new Path(path);
 	                	    int indice= 0 ; 
-	                        FileSystem fs = FileSystem.get(new Configuration());
-	                        
+	                        FileSystem fs = FileSystem.get(new Configuration());                     
 	                        BufferedReader br=new BufferedReader(new InputStreamReader(fs.open(pt)));
 	                        String line;
 	                        Pattern pattern = Pattern.compile("\\w+");
