@@ -58,6 +58,18 @@ public class MyClient {
             System.out.println("construct"+ proxy.send() );
             
             
+            // send matriceInverse a client
+       		pb = new ProcessBuilder("/bin/sh", "./run_distcp.sh" 
+        			, hadoopCluster+"/user/hadoopuser/inputMatrice/matriceRInverse"
+        			, hadoopCluster+"/client/");
+            p = pb.start(); 
+        	System.out.println("wait send" + p.waitFor());
+            // calculer AB        	
+        	pb = new ProcessBuilder("/bin/sh", "./run_product.sh" 
+        			, hadoopCluster+"/client"
+        			, hadoopCluster+"/result", "5" , "5" , "5" , "MAB", "MI", "AB");
+        	p = pb.start(); 
+    		System.out.println("wait multi" + p.waitFor());
             //int result = proxy.Add(145, 25);
             //System.out.println("10+25=" + result);
 
