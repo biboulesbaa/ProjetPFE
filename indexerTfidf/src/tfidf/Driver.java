@@ -22,7 +22,7 @@ public class Driver {
 	 * @param args
 	 */
 	
-	public static boolean ligne = true ; 
+	public static boolean ligne = false ; 
 	
 	public static String HADOOP_CLUSTER=null;
 	
@@ -35,9 +35,17 @@ public class Driver {
 		conf.addResource("/usr/local/hadoop/etc/hadoop/core-site.xml");
 		HADOOP_CLUSTER=conf.get("fs.defaultFS");
 		
-			
-        
+		if(args[0]=="tf-idf-3")
+		{
+			if(args[4]=="C"){
+				Driver.ligne=false;
+			}
+		}
+		
+		
+		
 		try {
+			
 			// Add all the join main classes
 			pgd.addClass("tf-idf-1", WordFrequenceInDoc.class,
 					"TF-IDF 1 --- Word Frequence In Documents");
@@ -45,6 +53,8 @@ public class Driver {
 					"TF-IDF 2 --- Word Counts In Documents");
 			pgd.addClass("tf-idf-3", WordsInCorpusTFIDF.class,
 					"TF-IDF 3 --- Word in Corpus and TF-IDF");
+			
+			
 			
 		
 			// Execute the appropriate class
