@@ -32,11 +32,19 @@ public class WordsInCorpusTFIDF extends Configured implements Tool {
 	public int run(String[] args) throws Exception {
 
 		if (args.length != 4) {
-			System.out
-					.println("Usage: tf-idf-3 <doc-input> <tf-idf-2-output> <output> <TYPE>");
+			System.out.println("Usage: tf-idf-3 <doc-input> <tf-idf-2-output> <output> <TYPE>");
 			System.exit(-1);
 		}
+		
+		if((args[3]).equalsIgnoreCase("col")){
+			Driver.ligne=false;
+		}else{
+			if((args[3]).equalsIgnoreCase("row")){
+				Driver.ligne=true;
+			}
+		}
 
+		
 		Configuration conf = getConf();
 		Job job = new Job(conf, "Docs In Corpus and TF-IDF");
 		conf = job.getConfiguration();
