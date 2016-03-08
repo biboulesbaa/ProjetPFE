@@ -24,6 +24,12 @@ public class MyClient {
         	ProcessBuilder pb = new ProcessBuilder("/bin/sh", "./run_tfidf.sh" , "input2/" , "output/","C"  );
        		Process p = pb.start(); 
        		System.out.println("wait create" + p.waitFor());
+       		// send part-r-00000 de tfidf3 a inputmatrice
+       		pb = new ProcessBuilder("/bin/sh", "./run_distcp.sh" 
+        			, hadoopCluster+"/user/hadoopuser/output/tfidf3/part-r-00000"
+        			, hadoopCluster+"/user/hadoopuser/inputMatrice/");
+            p = pb.start(); 
+        	System.out.println("wait send" + p.waitFor());
        		//generation
        		pb = new ProcessBuilder("/bin/sh", "./run_generation.sh" 
         	, hadoopCluster+"/user/hadoopuser/inputMatrice/"
@@ -48,7 +54,7 @@ public class MyClient {
     		
         	pb = new ProcessBuilder("/bin/sh", "./run_distcp.sh" 
         			, hadoopCluster+"/user/hadoopuser/outputMatrice/part-r-00000"
-        			, hadoopCluster+"/");
+        			, hadoopCluster+"/server");
         	p = pb.start(); 
     		System.out.println("wait send" + p.waitFor());
     			
@@ -59,6 +65,21 @@ public class MyClient {
             System.out.println("construct"+ proxy.construct(10, 40) );
             System.out.println("product"+ proxy.product() );
             System.out.println("send"+ proxy.send() );
+            
+            // send matriceInverse a client
+       		pb = new ProcessBuilder("/bin/sh", "./run_distcp.sh" 
+        			, hadoopCluster+"/user/hadoopuser/inputMatrice/matriceRInverse"
+        			, hadoopCluster+"/client/");
+            p = pb.start(); 
+        	System.out.println("wait send" + p.waitFor());
+            // calculer AB        	
+        	pb = new ProcessBuilder("/bin/sh", "./run_product.sh" 
+        			, hadoopCluster+"/client"
+        			, hadoopCluster+"/result", "5" , "5" , "5" , "MAB", "MI", "AB");
+        	p = pb.start(); 
+    		System.out.println("wait multi" + p.waitFor());
+            //int result = proxy.Add(145, 25);
+            //System.out.println("10+25=" + result);
 
             RPC.stopProxy(proxy); 
         } catch (Throwable e) {
