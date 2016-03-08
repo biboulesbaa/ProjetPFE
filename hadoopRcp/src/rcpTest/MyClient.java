@@ -23,6 +23,12 @@ public class MyClient {
         	ProcessBuilder pb = new ProcessBuilder("/bin/sh", "./run_tfidf.sh" , "input2/" , "output/"  );
        		Process p = pb.start(); 
        		System.out.println("wait create" + p.waitFor());
+       		// send part-r-00000 de tfidf3 a inputmatrice
+       		pb = new ProcessBuilder("/bin/sh", "./run_distcp.sh" 
+        			, hadoopCluster+"/user/hadoopuser/output/tfidf3/part-r-00000"
+        			, hadoopCluster+"/user/hadoopuser/inputMatrice/");
+            p = pb.start(); 
+        	System.out.println("wait send" + p.waitFor());
        		//generation
        		pb = new ProcessBuilder("/bin/sh", "./run_generation.sh" 
         			, hadoopCluster+"/user/hadoopuser/inputMatrice/"

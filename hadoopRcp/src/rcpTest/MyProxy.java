@@ -46,11 +46,18 @@ public class MyProxy implements IProxyProtocol {
 		Configuration conf = new Configuration();
         conf.addResource(new Path("/usr/local/hadoop/etc/hadoop/core-site.xml"));
         String hadoopCluster = conf.get("fs.defaultFS")  ;
-        ProcessBuilder pb = new ProcessBuilder("/bin/sh", "./run_product.sh" 
-    			, hadoopCluster+"/user/hadoopuser/inputMatrice/"
-    			, hadoopCluster+"/user/hadoopuser/outputMatrice/", "5" , "40" , "5" , "MA", "B", "MAB");
-        Process p;
-		try {
+        // script d envois de la matrice 
+        try {
+        ProcessBuilder pb = new ProcessBuilder("/bin/sh", "./run_distcp.sh" 
+    			, hadoopCluster+"/user/hadoopuser/outputserver/tfidf3/part-r-00000"
+    			, hadoopCluster+"/server");
+        Process p = pb.start(); 
+    	System.out.println("wait send" + p.waitFor());
+        // multuplication
+    	pb = new ProcessBuilder("/bin/sh", "./run_product.sh" 
+    			, hadoopCluster+"/server"
+    			, hadoopCluster+"/serverproduct/", "5" , "40" , "5" , "MA", "B", "MAB");
+		
 			p = pb.start();
 			System.out.println("wait multi" + p.waitFor());
 		} catch (IOException | InterruptedException e) {
@@ -70,7 +77,7 @@ public class MyProxy implements IProxyProtocol {
         
         try {
         	ProcessBuilder pb = new ProcessBuilder("/bin/sh", "./run_distcp.sh" 
-        			, hadoopCluster+"/user/hadoopuser/outputMatrice/part-r-00000"
+        			, hadoopCluster+"/serverproduct/part-r-00000"
         			, hadoopCluster+"/client");
         	Process p = pb.start();
 			System.out.println("wait send" + p.waitFor());
