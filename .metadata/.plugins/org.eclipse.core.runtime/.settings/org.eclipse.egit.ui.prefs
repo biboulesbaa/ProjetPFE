@@ -1,3 +1,3 @@
-commit_dialog_history_messages=<?xml version\="1.0" encoding\="UTF-8"?>\n<messages>\n<message>commit write</message>\n<message>commit inverse matrix</message>\n</messages>
+commit_dialog_history_messages=<?xml version\="1.0" encoding\="UTF-8"?>\n<messages>\n<message>Merge branch &apos;master&apos; of https\://github.com/biboulesbaa/ProjetPFE.git&\#x0A;&\#x0A;Conflicts\:&\#x0A;&\#x09;hadoopRcp/src/rcpTest/MyClient.java&\#x0A;</message>\n<message>commit client</message>\n<message>commit 3 mars 11\:30</message>\n<message>commit 3 mars</message>\n<message>commit</message>\n<message>src tfidf</message>\n<message>config</message>\n<message>remove matriceUtil</message>\n<message>commit write</message>\n<message>commit inverse matrix</message>\n</messages>
 eclipse.preferences.version=1
 show_initial_config_dialog=false

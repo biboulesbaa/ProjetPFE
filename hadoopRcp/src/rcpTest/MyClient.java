@@ -21,7 +21,7 @@ public class MyClient {
         
         try {
             // script de creation de la matrice     
-        	ProcessBuilder pb = new ProcessBuilder("/bin/sh", "./run_tfidf.sh" , "input2/" , "output/"  );
+        	ProcessBuilder pb = new ProcessBuilder("/bin/sh", "./run_tfidf.sh" , "input2/" , "output/","C"  );
        		Process p = pb.start(); 
        		System.out.println("wait create" + p.waitFor());
        		//generation

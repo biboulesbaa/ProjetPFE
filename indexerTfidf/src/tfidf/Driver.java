@@ -22,7 +22,7 @@ public class Driver {
 	 * @param args
 	 */
 	
-	public static boolean ligne = false ; 
+	public static boolean ligne = true ; 
 	
 	public static String HADOOP_CLUSTER=null;
 	
@@ -33,14 +33,11 @@ public class Driver {
 		
 		Configuration conf=new Configuration();
 		conf.addResource("/usr/local/hadoop/etc/hadoop/core-site.xml");
-		HADOOP_CLUSTER=conf.get("fs.defaultFS");
+		HADOOP_CLUSTER= conf.get("fs.defaultFS");
 		
-		if(args[0]=="tf-idf-3")
-		{
-			if(args[4]=="C"){
-				Driver.ligne=false;
-			}
-		}
+		
+			
+		
 		
 		
 		
