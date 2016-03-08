@@ -20,7 +20,7 @@ public class MyClient {
         String hadoopCluster = conf.get("fs.defaultFS")  ;
         try {
             // script de creation de la matrice     
-        	ProcessBuilder pb = new ProcessBuilder("/bin/sh", "./run_tfidf.sh" , "input2/" , "output/"  );
+        	ProcessBuilder pb = new ProcessBuilder("/bin/sh", "./run_tfidf.sh" , "input2/" , "output/" , "row");
        		Process p = pb.start(); 
        		System.out.println("wait create" + p.waitFor());
        		// send part-r-00000 de tfidf3 a inputmatrice

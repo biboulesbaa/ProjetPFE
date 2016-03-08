@@ -28,7 +28,7 @@ public class MyProxy implements IProxyProtocol {
 	@Override
 	public int construct(int n, int m) {
 		// TODO Auto-generated method stub
-		ProcessBuilder pb = new ProcessBuilder("/bin/sh", "./run_tfidf.sh" , "inputserver/" , "outputserver/"  );
+		ProcessBuilder pb = new ProcessBuilder("/bin/sh", "./run_tfidf.sh" , "inputserver/" , "outputserver/", "col"  );
    		Process p;
 		try {
 			p = pb.start();
