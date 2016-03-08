@@ -38,7 +38,7 @@ public class MyClient {
        	    // script d envois de la matrice 
         	pb = new ProcessBuilder("/bin/sh", "./run_distcp.sh" 
         			, hadoopCluster+"/user/hadoopuser/outputMatrice/part-r-00000"
-        			, hadoopCluster+"/");
+        			, hadoopCluster+"/server");
         	p = pb.start(); 
     		System.out.println("wait send" + p.waitFor());
     		
