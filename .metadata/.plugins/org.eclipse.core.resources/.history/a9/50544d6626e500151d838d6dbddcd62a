@@ -21,9 +21,11 @@ public class MyClient {
         
         try {
             // script de creation de la matrice     
-
+<<<<<<< HEAD
+        	ProcessBuilder pb = new ProcessBuilder("/bin/sh", "./run_tfidf.sh" , "input2/" , "output/","C"  );
+=======
         	ProcessBuilder pb = new ProcessBuilder("/bin/sh", "./run_tfidf.sh" , "input2/" , "output/" , "row");
-
+>>>>>>> branch 'master' of https://github.com/biboulesbaa/ProjetPFE.git
        		Process p = pb.start(); 
        		System.out.println("wait create" + p.waitFor());
        		// send part-r-00000 de tfidf3 a inputmatrice
